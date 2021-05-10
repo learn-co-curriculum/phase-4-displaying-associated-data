@@ -29,7 +29,7 @@ rails db:migrate db:seed
 Our designers have created a mock of one of the pages of our application for
 displaying details about one individual dog house. It will look like this:
 
-![AirBudNB reviews page](airbudnb-dog_houses-show.png)
+![AirBudNB reviews page](https://raw.githubusercontent.com/learn-co-curriculum/phase-4-displaying-associated-data/master/airbudnb-dog_houses-show.png)
 
 Our API will need to serve up the data for this page as efficiently as possible.
 Ideally, that means we'll be able to have just **one** request that returns the
@@ -137,7 +137,7 @@ with just one request.
 One of the other pages our frontend will need is a page to list out all of the
 top reviews, along with their associated dog house:
 
-![AirBudNB reviews page](airbudnb-dog_houses-show.png)
+![AirBudNB reviews page](https://raw.githubusercontent.com/learn-co-curriculum/phase-4-displaying-associated-data/master/airbudnb-dog_houses-show.png)
 
 Again, we'd like to make just one request to get all of the data to populate
 this view. Currently, a `GET` to `/reviews` returns an array of all review
