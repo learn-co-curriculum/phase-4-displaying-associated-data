@@ -137,7 +137,7 @@ with just one request.
 One of the other pages our frontend will need is a page to list out all of the
 top reviews, along with their associated dog house:
 
-![AirBudNB reviews page](https://raw.githubusercontent.com/learn-co-curriculum/phase-4-displaying-associated-data/master/airbudnb-dog_houses-show.png)
+![AirBudNB reviews page](https://raw.githubusercontent.com/learn-co-curriculum/phase-4-displaying-associated-data/master/airbudnb-reviews-index.png)
 
 Again, we'd like to make just one request to get all of the data to populate
 this view. Currently, a `GET` to `/reviews` returns an array of all review
