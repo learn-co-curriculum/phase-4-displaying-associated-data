@@ -247,6 +247,23 @@ under each review representing the dog house that the review belongs to:
 
 Now we can retrieve all the data for our reviews page with just one request!
 
+You may notice that making the request for this data is a bit slow compared to
+some of the other endpoints we've been working on. This is due to how Active
+Record is accessing data for the associated dog house for each individual
+review.
+
+If you open the Rails server log after making this request, you'll see why:
+there are a lot of SQL queries being fired off at our database! This is an
+example of the [N+1 problem][n+1 problem]. First, we load all reviews with
+`Review.all`; then, for each review returned by `Review.all`, we make a separate
+query for each dog house associated with that review. This is definitely not
+ideal! We'll spend more time on this problem in a future lesson covering a
+solution to this problem, but for now, keep an eye out for slow queries and look
+at the SQL code being executed in your Rails server to identify where these
+issues arise.
+
+[n+1 problem]: https://www.sitepoint.com/silver-bullet-n1-problem/
+
 ## Conclusion
 
 When developing APIs with our frontend needs in mind, it's best to structure our
