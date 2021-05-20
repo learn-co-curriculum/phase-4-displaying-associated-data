@@ -8,8 +8,8 @@
 ## Introduction
 
 In this section, we're going to be building out an API for an exciting new
-business: AirBudNB, a website for renting dog houses. The two models we have to
-represent our application's data are **dog houses** and **reviews**: a dog house
+business: AirBudNB, a website for renting dog houses. We are using two models to
+represent our application's data: **dog houses** and **reviews**. A dog house
 has many reviews, and each review belongs to one dog house.
 
 ```txt
@@ -26,10 +26,10 @@ rails db:migrate db:seed
 
 ## Nesting has_many Associations
 
-Our designers have created a mock of one of the pages of our application for
+Our designers have created a mockup of one of the pages of our application for
 displaying details about one individual dog house. It will look like this:
 
-![AirBudNB reviews page](https://raw.githubusercontent.com/learn-co-curriculum/phase-4-displaying-associated-data/master/airbudnb-dog_houses-show.png)
+![AirBudNB reviews page](https://curriculum-content.s3.amazonaws.com/phase-4/displaying-associated-data/airbudnb-dog_houses-show.png)
 
 Our API will need to serve up the data for this page as efficiently as possible.
 Ideally, that means we'll be able to have just **one** request that returns the
@@ -69,6 +69,9 @@ reviews:
 }
 ```
 
+> *Note*: the seed file creates seed data randomly, so the data you see in your
+> browser will be different.
+
 Based on our models, we know each dog house has many reviews associated with it,
 and we can use Active Record to access that data:
 
@@ -89,8 +92,9 @@ So we need some way to **include** this review data in the response from our
 controller!
 
 Thankfully for us, Rails gives us some additional [serialization][] options when
-converting Active Record objects to JSON data. In this case, the `include` option
-will let us nest associated data in our response:
+converting Active Record objects to JSON data. In this case, the `include`
+option will let us nest associated data in our response.  Let's update the code
+in our controller:
 
 ```rb
 render json: dog_house, include: :reviews
@@ -98,7 +102,9 @@ render json: dog_house, include: :reviews
 
 Using `include: :reviews` will call the `.reviews` method that is provided with
 the `has_many :reviews` macro, and will serialize the reviews as a nested array
-of JSON data. Try making that same `GET /dog_houses/1` request again:
+of JSON data. Try making that same `GET /dog_houses/1` request again, and you
+should now see the reviews listed along with the dog house they belong to.
+Again, your data will be different, but it should be structured as follows:
 
 ```json
 {
@@ -137,7 +143,7 @@ with just one request.
 One of the other pages our frontend will need is a page to list out all of the
 top reviews, along with their associated dog house:
 
-![AirBudNB reviews page](https://raw.githubusercontent.com/learn-co-curriculum/phase-4-displaying-associated-data/master/airbudnb-reviews-index.png)
+![AirBudNB reviews page](https://curriculum-content.s3.amazonaws.com/phase-4/displaying-associated-data/airbudnb-reviews-index.png)
 
 Again, we'd like to make just one request to get all of the data to populate
 this view. Currently, a `GET` to `/reviews` returns an array of all review
@@ -257,10 +263,9 @@ there are a lot of SQL queries being fired off at our database! This is an
 example of the [N+1 problem][n+1 problem]. First, we load all reviews with
 `Review.all`; then, for each review returned by `Review.all`, we make a separate
 query for each dog house associated with that review. This is definitely not
-ideal! We'll spend more time on this problem in a future lesson covering a
-solution to this problem, but for now, keep an eye out for slow queries and look
-at the SQL code being executed in your Rails server to identify where these
-issues arise.
+ideal! We'll learn about a solution to this problem in a future lesson, but for
+now, keep an eye out for slow queries and look at the SQL code being executed in
+your Rails server to identify where these issues arise.
 
 [n+1 problem]: https://www.sitepoint.com/silver-bullet-n1-problem/
 
@@ -269,8 +274,8 @@ issues arise.
 When developing APIs with our frontend needs in mind, it's best to structure our
 data to minimize the number of requests needed for the frontend to retrieve that
 data. We can take advantage of Active Record associations using `has_many` and
-`belongs_to` relationships, and serialize data between related models using the
-`include` option when responding with JSON data.
+`belongs_to` relationships, and serialize JSON data between related models using
+the `include` option.
 
 ## Resources
 
