@@ -16,6 +16,8 @@ has many reviews, and each review belongs to one dog house.
 DogHouse -< Review
 ```
 
+![AirBudNB entity relationship diagram](https://curriculum-content.s3.amazonaws.com/phase-4/displaying-associated-data/airbudnb-erd.png)
+
 The code for our models is already in place, so we can focus on getting the
 controller to return the right data. To get set up, run:
 
