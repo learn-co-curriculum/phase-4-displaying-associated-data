@@ -39,17 +39,10 @@ Start up your Rails server and make a GET request to `/dog_houses/1`. Check
 out the controller action for this request:
 
 ```rb
-class DogHousesController < ApplicationController
-
-  def show
-    dog_house = DogHouse.find_by(id: params[:id])
-    if dog_house
-      render json: dog_house
-    else
-      render json: { error: "Dog house not found" }, status: :not_found
-    end
-  end
-
+# app/controllers/dog_houses_controller.rb
+def show
+  dog_house = DogHouse.find(params[:id])
+  render json: dog_house
 end
 ```
 
@@ -69,7 +62,7 @@ reviews:
 }
 ```
 
-> *Note*: the seed file creates seed data randomly, so the data you see in your
+> _Note_: the seed file creates seed data randomly, so the data you see in your
 > browser will be different.
 
 Based on our models, we know each dog house has many reviews associated with it,
@@ -93,7 +86,7 @@ controller!
 
 Thankfully for us, Rails gives us some additional [serialization][] options when
 converting Active Record objects to JSON data. In this case, the `include`
-option will let us nest associated data in our response.  Let's update the code
+option will let us nest associated data in our response. Let's update the code
 in our controller:
 
 ```rb
