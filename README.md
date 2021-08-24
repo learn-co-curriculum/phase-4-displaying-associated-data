@@ -21,9 +21,9 @@ DogHouse -< Review
 The code for our models is already in place, so we can focus on getting the
 controller to return the right data. To get set up, run:
 
-```sh
-bundle install
-rails db:migrate db:seed
+```console
+$ bundle install
+$ rails db:migrate db:seed
 ```
 
 ## Nesting has_many Associations
