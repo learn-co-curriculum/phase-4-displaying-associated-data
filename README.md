@@ -272,6 +272,12 @@ data. We can take advantage of Active Record associations using `has_many` and
 `belongs_to` relationships, and serialize JSON data between related models using
 the `include` option.
 
+## Check For Understanding
+
+Before you move on, make sure you can answer the following question:
+
+1. What does the `include` option do for us and how do we use it?
+
 ## Resources
 
 - [Serialization: as_json][serialization]
